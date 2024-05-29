@@ -1,6 +1,11 @@
 import { Container } from '@/components'
 import { withGameContext } from './game-context'
+import { GameBoard } from './game-board'
+import { ScoreBoard } from './score-board'
 
 export const Game = withGameContext(() => (
-  <Container className="py-6 h-full flex flex-col">game</Container>
+  <Container className="py-16 h-full flex flex-col items-center gap-10 text-white">
+    <ScoreBoard />
+    <GameBoard />
+  </Container>
 ))
