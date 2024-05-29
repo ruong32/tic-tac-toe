@@ -25,3 +25,7 @@ export const useSetterContext = () => {
 export const PlayerMoveContext = React.createContext<PlayerMoveContextValue>(
   initialPlayerMoveValue
 )
+
+export const usePlayerMoveContext = () => {
+  return React.useContext(PlayerMoveContext)
+}
