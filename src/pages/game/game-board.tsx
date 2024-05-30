@@ -60,7 +60,8 @@ export const GameBoard = () => {
         className="grid place-self-center rounded-2xl shadow-[inset_0_0_0_1px_white] overflow-hidden"
         style={{
           gridTemplateColumns: `repeat(${GAME_WIDTH}, ${CELL_WIDTH}px)`,
-          gridAutoRows: `${CELL_WIDTH}px`
+          gridAutoRows: `${CELL_WIDTH}px`,
+          minHeight: `${GAME_WIDTH * CELL_WIDTH}px`
         }}
       >
         {generateCells()}
