@@ -8,10 +8,22 @@ import {
 } from './game-context'
 import { Player } from '@/types/player'
 import { CircleIcon, CrossIcon } from '@/components/icons'
+import { useCallBackRef } from '@/hooks/use-callback-ref'
+
+const CellMemo = React.memo(Cell)
 
 export const GameBoard = () => {
   const { oMoves, xMoves, turn } = usePlayerMoveContext()
   const { setOMoves, setXMoves } = useSetterContext()
+
+  const selectCell = useCallBackRef((x: number, y: number) => {
+    if (turn === Player.o) {
+      setOMoves((moves) => [...moves, { x, y }])
+    } else if (turn === Player.x) {
+      setXMoves((moves) => [...moves, { x, y }])
+    }
+  })
+
   const generateCells = () => {
     const cells: React.ReactNode[] = []
     Array.from(Array(GAME_WIDTH).keys()).forEach((y) => {
@@ -25,15 +37,11 @@ export const GameBoard = () => {
           }
         })()
         cells.push(
-          <Cell
+          <CellMemo
             key={`${x}-${y}`}
-            onClick={() => {
-              if (turn === Player.o) {
-                setOMoves((moves) => [...moves, { x, y }])
-              } else if (turn === Player.x) {
-                setXMoves((moves) => [...moves, { x, y }])
-              }
-            }}
+            x={x}
+            y={y}
+            onClick={selectCell}
             playerSeleclted={playerSelected}
           />
         )
