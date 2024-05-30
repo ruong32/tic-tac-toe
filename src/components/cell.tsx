@@ -20,7 +20,7 @@ export const Cell = (props: CellProps) => {
     >
       <div
         className={twMerge(
-          'h-4/6 w-4/5 scale-0 transition-transform',
+          'h-4/6 w-4/6 scale-0 transition-transform',
           props.playerSeleclted && 'scale-100'
         )}
       >
