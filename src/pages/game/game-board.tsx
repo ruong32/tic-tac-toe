@@ -7,6 +7,7 @@ import {
   useSetterContext
 } from './game-context'
 import { Player } from '@/types/player'
+import { CircleIcon, CrossIcon } from '@/components/icons'
 
 export const GameBoard = () => {
   const { oMoves, xMoves, turn } = usePlayerMoveContext()
@@ -41,14 +42,21 @@ export const GameBoard = () => {
     return cells
   }
   return (
-    <div
-      className="grid place-self-center rounded-2xl shadow-[inset_0_0_0_1px_white] overflow-hidden"
-      style={{
-        gridTemplateColumns: `repeat(${GAME_WIDTH}, ${CELL_WIDTH}px)`,
-        gridAutoRows: `${CELL_WIDTH}px`
-      }}
-    >
-      {generateCells()}
-    </div>
+    <>
+      <div className="flex items-center gap-2 text-2xl">
+        <span>Current turn:</span>
+        {turn === Player.o && <CircleIcon className="h-10 w-10" />}
+        {turn === Player.x && <CrossIcon className="h-10 w-10" />}
+      </div>
+      <div
+        className="grid place-self-center rounded-2xl shadow-[inset_0_0_0_1px_white] overflow-hidden"
+        style={{
+          gridTemplateColumns: `repeat(${GAME_WIDTH}, ${CELL_WIDTH}px)`,
+          gridAutoRows: `${CELL_WIDTH}px`
+        }}
+      >
+        {generateCells()}
+      </div>
+    </>
   )
 }
