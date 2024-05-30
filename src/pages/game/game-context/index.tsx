@@ -20,6 +20,7 @@ const GameProvider = ({ children }: { children?: React.ReactNode }) => {
   const [xMoves, setXMoves] = React.useState<Point[]>([])
   const [oMoves, setOMoves] = React.useState<Point[]>([])
   const [winner, setWinner] = React.useState<Player>()
+  const turn = React.useRef<Player>(Player.o)
 
   const setterValue: SetterContextValue = React.useMemo(
     () => ({ setScoreX, setScoreO, setXMoves, setOMoves }),
@@ -35,20 +36,31 @@ const GameProvider = ({ children }: { children?: React.ReactNode }) => {
   )
 
   const playerMoveValue: PlayerMoveContextValue = React.useMemo(() => {
-    let currentTurn = Player.o
-    if (oMoves.length > xMoves.length) {
-      currentTurn = Player.x
+    if (turn.current === Player.o) {
+      turn.current = Player.x
+    } else {
+      turn.current = Player.o
     }
-    return { turn: currentTurn, xMoves, oMoves }
+    return { turn: turn.current, xMoves, oMoves }
   }, [xMoves, oMoves])
 
   React.useEffect(() => {
     if (checkWinning(xMoves)) {
       setWinner(Player.x)
       setScoreX((score) => score + 1)
+      turn.current = Player.x
     } else if (checkWinning(oMoves)) {
       setWinner(Player.o)
       setScoreO((score) => score + 1)
+      turn.current = Player.o
+    } else if (oMoves.length + xMoves.length >= GAME_WIDTH * GAME_WIDTH) {
+      setXMoves([])
+      setOMoves([])
+      if (turn.current === Player.o) {
+        turn.current = Player.x
+      } else {
+        turn.current = Player.o
+      }
     }
   }, [xMoves, oMoves])
 
