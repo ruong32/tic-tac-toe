@@ -11,7 +11,6 @@ import { checkWinning } from './rule'
 import { ResultDialog } from '../result-dialog'
 
 export const GAME_WIDTH = 3
-export const CELL_WIDTH = 120
 export const INLINE_CELLS_TO_WIN = 3
 
 const GameProvider = ({ children }: { children?: React.ReactNode }) => {
