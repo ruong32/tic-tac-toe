@@ -1,7 +1,6 @@
 import { Cell } from '@/components'
 import React from 'react'
 import {
-  CELL_WIDTH,
   GAME_WIDTH,
   usePlayerMoveContext,
   useSetterContext
@@ -57,11 +56,9 @@ export const GameBoard = () => {
         {turn === Player.x && <CrossIcon className="h-10 w-10" />}
       </div>
       <div
-        className="grid place-self-center rounded-2xl shadow-[inset_0_0_0_1px_white] overflow-hidden"
+        className="grid place-self-center w-full justify-center no-scrollbar overflow-auto"
         style={{
-          gridTemplateColumns: `repeat(${GAME_WIDTH}, ${CELL_WIDTH}px)`,
-          gridAutoRows: `${CELL_WIDTH}px`,
-          minHeight: `${GAME_WIDTH * CELL_WIDTH}px`
+          gridTemplateColumns: `repeat(${GAME_WIDTH}, minmax(auto, 120px))`
         }}
       >
         {generateCells()}

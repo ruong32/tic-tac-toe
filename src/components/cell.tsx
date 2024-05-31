@@ -12,7 +12,7 @@ export const Cell = (props: CellProps) => {
   return (
     <div
       className={twMerge(
-        'border border-white transition-shadow cursor-pointer text-white grid place-items-center',
+        'relative border pb-[100%] border-white/50 transition-shadow cursor-pointer text-white grid place-items-center',
         props.playerSeleclted
           ? 'pointer-events-none'
           : 'hover:shadow-[0_0_6px_2px_white]'
@@ -21,7 +21,7 @@ export const Cell = (props: CellProps) => {
     >
       <div
         className={twMerge(
-          'h-4/6 w-4/6 scale-0 transition-transform',
+          'absolute h-4/6 w-4/6 scale-0 transition-transform',
           props.playerSeleclted && 'scale-100'
         )}
       >
